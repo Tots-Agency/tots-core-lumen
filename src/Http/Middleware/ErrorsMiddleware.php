@@ -23,7 +23,7 @@ class ErrorsMiddleware
                 'code' => $th->getCode(),
                 'file' => $th->getFile(),
                 'line' => $th->getLine()
-            ]]);
+            ]], 400);
         }
 
         return $response;
