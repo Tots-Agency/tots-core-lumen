@@ -9,17 +9,24 @@ namespace Tots\Core\Helpers;
  */
 class CoordinatesHelper 
 {
-    public static function splitName($latitude, $longitude, $mts)
+    public static function sumMts($latitude, $longitude, $mts)
     {
-        // Radio aproximado de la Tierra en metros
-        $radioTierra = 6371000;
+        return self::sumBase($latitude, $longitude, 6371000, $mts);
+    }
 
+    public static function sumMiles($latitude, $longitude, $miles)
+    {
+        return self::sumBase($latitude, $longitude, 3959, $miles);
+    }
+
+    public static function sumBase($latitude, $longitude, $earthRadius, $value)
+    {
         // Convertir las coordenadas de grados a radianes
         $latitudRadianes = deg2rad($latitude);
         $longitudRadianes = deg2rad($longitude);
 
         // Calcular el desplazamiento en radianes
-        $desplazamientoRadial = $mts / $radioTierra;
+        $desplazamientoRadial = $value / $earthRadius;
 
         // Calcular la nueva latitud
         $nuevaLatitudRadianes = $latitudRadianes + $desplazamientoRadial;
